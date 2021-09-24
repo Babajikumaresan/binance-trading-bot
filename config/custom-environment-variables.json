@@ -1,0 +1,263 @@
+{
+  "mode": "BINANCE_MODE",
+  "tz": "BINANCE_TZ",
+  "binance": {
+    "live": {
+      "apiKey": "BINANCE_LIVE_API_KEY",
+      "secretKey": "BINANCE_LIVE_SECRET_KEY"
+    },
+    "test": {
+      "apiKey": "BINANCE_TEST_API_KEY",
+      "secretKey": "BINANCE_TEST_SECRET_KEY"
+    }
+  },
+  "redis": {
+    "host": "BINANCE_REDIS_HOST",
+    "port": {
+      "__name": "BINANCE_REDIS_PORT",
+      "__format": "number"
+    },
+    "password": "BINANCE_REDIS_PASSWORD",
+    "db": "BINANCE_REDIS_DB"
+  },
+  "mongo": {
+    "host": "BINANCE_MONGO_HOST",
+    "port": {
+      "__name": "BINANCE_MONGO_PORT",
+      "__format": "number"
+    },
+    "database": "BINANCE_MONGO_DATABASE"
+  },
+  "slack": {
+    "enabled": {
+      "__name": "BINANCE_SLACK_ENABLED",
+      "__format": "boolean"
+    },
+    "webhookUrl": "BINANCE_SLACK_WEBHOOK_URL",
+    "channel": "BINANCE_SLACK_CHANNEL",
+    "username": "BINANCE_SLACK_USERNAME"
+  },
+  "localTunnel": {
+    "enabled": {
+      "__name": "BINANCE_LOCAL_TUNNEL_ENABLED",
+      "__format": "boolean"
+    },
+    "subdomain": "BINANCE_LOCAL_TUNNEL_SUBDOMAIN"
+  },
+  "featureToggle": {
+    "notifyOrderConfirm": {
+      "__name": "BINANCE_FEATURE_TOGGLE_NOTIFY_ORDER_CONFIRM",
+      "__description": "Set a boolean to notify the order checking/confirm messages. Note that enabling this feature toggle can flood the messages.",
+      "__format": "boolean"
+    },
+    "notifyDebug": {
+      "__name": "BINANCE_FEATURE_TOGGLE_NOTIFY_DEBUG",
+      "__description": "Set a boolean to notify the debug message. Note that enabling this feature toggle can flood the messages.",
+      "__format": "boolean"
+    },
+    "notifyOrderExecute": {
+      "__name": "BINANCE_FEATURE_TOGGLE_NOTIFY_ORDER_EXECUTE",
+      "__description": "Set a boolean to notify the order executed messages. Note that enabling this feature toggle can flood the messages.",
+      "__format": "boolean"
+    }
+  },
+  "authentication": {
+    "enabled": {
+      "__name": "BINANCE_AUTHENTICATION_ENABLED",
+      "__description": "Set a boolean to enable authentication on the bot.",
+      "__format": "boolean"
+    },
+    "password": "BINANCE_AUTHENTICATION_PASSWORD",
+    "loginLimiter": {
+      "maxConsecutiveFails": {
+        "__name": "BINANCE_AUTHENTICATION_LOGIN_LIMITER_MAX_CONSECUTIVE_FAILS",
+        "__description": "Set number of allowed login failures. If failed maximum consecutive fails, the bot will block the request based on the block duration (seconds).",
+        "__format": "number"
+      },
+      "duration": {
+        "__name": "BINANCE_AUTHENTICATION_LOGIN_LIMITER_DURATION",
+        "__description": "Set seconds for storing points since the first login failure.",
+        "__format": "number"
+      },
+      "blockDuration": {
+        "__name": "BINANCE_AUTHENTICATION_LOGIN_LIMITER_BLOCK_DURATION",
+        "__description": "Set seconds for blocking the request after reaching maximum consecutive login failures.",
+        "__format": "number"
+      }
+    }
+  },
+  "jobs": {
+    "alive": {
+      "enabled": {
+        "__name": "BINANCE_JOBS_ALIVE_ENABLED",
+        "__format": "boolean"
+      },
+      "cronTime": "BINANCE_JOBS_ALIVE_CRONTIME",
+      "priceSymbol": "BINANCE_JOBS_ALIVE_PRICE_SYMBOL",
+      "balanceSymbols": "BINANCE_JOBS_ALIVE_BALANCE_SYMBOLS"
+    },
+    "trailingTrade": {
+      "enabled": {
+        "__name": "BINANCE_JOBS_TRAILING_TRADE_ENABLED",
+        "__format": "boolean"
+      },
+      "cronTime": "BINANCE_JOBS_TRAILING_TRADE_CRON_TIME",
+      "symbols": {
+        "__name": "BINANCE_JOBS_TRAILING_TRADE_SYMBOLS",
+        "__format": "json"
+      },
+      "botOptions": {
+        "authentication": {
+          "lockList": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BOT_OPTIONS_AUTHENTICATION_LOCK_LIST",
+            "__description": "Set a boolean to lock the list or not. If locking the list, the bot will display the login screen before showing the list. If don't lock the list, the bot will display the symbol list, but disabling actions.",
+            "__format": "boolean"
+          },
+          "lockAfter": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BOT_OPTIONS_AUTHENTICATION_LOCK_AFTER",
+            "__description": "Set minutes for the authentication. Once the time passes the configured minutes after login, the bot will be automatically locked.",
+            "__format": "number"
+          }
+        },
+        "autoTriggerBuy": {
+          "enabled": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BOT_OPTIONS_AUTO_TRIGGER_BUY",
+            "__description": "Set a boolean to trigger 1st grid trade for buying after removing the last buy price due to completed grid trades for selling. Note that this action may be triggered if you sell the coin in Binance directly and the last buy price was recorded.",
+            "__format": "boolean"
+          },
+          "triggerAfter": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BOT_OPTIONS_TRIGGER_AFTER",
+            "__description": "Set minutes to trigger buy orders for the symbol after removing the last buy price.",
+            "__format": "number"
+          }
+        },
+        "orderLimit": {
+          "enabled": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BOT_OPTIONS_ORDER_LIMIT_ENABLED",
+            "__description": "Set a boolean to restrict the order based on the configuration. If enabled, the bot will not place orders if the conditions meet.",
+            "__format": "boolean"
+          },
+          "maxBuyOpenOrders": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BOT_OPTIONS_ORDER_LIMIT_MAX_BUY_OPEN_ORDERS",
+            "__description": "Set the number of concurrent open orders for buying. If set 3, then the bot will not place more than 3 buy open orders.",
+            "__format": "number"
+          },
+          "maxOpenTrades": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BOT_OPTIONS_ORDER_LIMIT_MAX_OPEN_TRADES",
+            "__description": "Set the maximum number of open trades. If set 5,, then the bot will not place a buy order when there are 5 symbols recorded with the last buy price.",
+            "__format": "number"
+          }
+        }
+      },
+      "candles": {
+        "interval": "BINANCE_JOBS_TRAILING_TRADE_CANDLES_INTERVAL",
+        "limit": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_CANDLES_LIMIT",
+          "__format": "number"
+        }
+      },
+      "buy": {
+        "enabled": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_BUY_ENABLED",
+          "__format": "boolean"
+        },
+        "triggerPercentage": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_BUY_TRIGGER_PERCENTAGE",
+          "__format": "number"
+        },
+        "stopPercentage": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_BUY_STOP_PERCENTAGE",
+          "__format": "number"
+        },
+        "limitPercentage": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_BUY_LIMIT_PERCENTAGE",
+          "__format": "number"
+        },
+        "athRestriction": {
+          "enabled": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BUY_ATH_RESTRICTION_ENABLE",
+            "__format": "boolean"
+          },
+          "candles": {
+            "interval": "BINANCE_JOBS_TRAILING_TRADE_BUY_ATH_RESTRICTION_CANDLES_INTERVAL",
+            "limit": {
+              "__name": "BINANCE_JOBS_TRAILING_TRADE_BUY_ATH_RESTRICTION_CANDLES_LIMIT",
+              "__format": "number"
+            }
+          },
+          "restrictionPercentage": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_BUY_ATH_RESTRICTION_RESTRICTION_PERCENTAGE",
+            "__format": "number"
+          }
+        }
+      },
+      "sell": {
+        "enabled": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SELL_ENABLED",
+          "__format": "boolean"
+        },
+        "triggerPercentage": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SELL_TRIGGER_PERCENTAGE",
+          "__format": "number"
+        },
+        "stopPercentage": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SELL_STOP_PERCENTAGE",
+          "__format": "number"
+        },
+        "limitPercentage": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SELL_LIMIT_PERCENTAGE",
+          "__format": "number"
+        },
+        "stopLoss": {
+          "enabled": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_SELL_STOP_LOSS_ENABLED",
+            "__format": "boolean"
+          },
+          "maxLossPercentage": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_SELL_STOP_LOSS_MAX_LOSS_PERCENTAGE",
+            "__format": "number"
+          },
+          "disableBuyMinutes": {
+            "__name": "BINANCE_JOBS_TRAILING_TRADE_SELL_STOP_LOSS_DISABLE_BUY_MINUTES",
+            "__format": "number"
+          },
+          "orderType": "BINANCE_JOBS_TRAILING_TRADE_SELL_STOP_LOSS_ORDER_TYPE"
+        }
+      },
+      "system": {
+        "temporaryDisableActionAfterConfirmingOrder": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SYSTEM_TEMPORARY_DISABLE_ACTION_AFTER_CONFIRMING_ORDER",
+          "__description": "Set the seconds for disabling any actions after confirming an order. Note that decreasing this value can cause issues with the bot not recording the last buy price.",
+          "__format": "number"
+        },
+        "checkManualOrderPeriod": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SYSTEM_CHECK_MANUAL_ORDER_PERIOD",
+          "__description": "Set the seconds for the period of checking the manual orders. Note that reducing the seconds can cause issues with the bot exceeding the API usage.",
+          "__format": "number"
+        },
+        "placeManualOrderInterval": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SYSTEM_PLACE_MANUAL_ORDER_INTERVAL",
+          "__description": "Set the seconds for the period of placing the manual orders. Note that reducing the seconds can cause issues with the bot exceeding the API usage.",
+          "__format": "number"
+        },
+        "refreshAccountInfoPeriod": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SYSTEM_REFRESH_ACCOUNT_INFO_PERIOD",
+          "__description": "Set the seconds for the period of checking the account info.",
+          "__format": "number"
+        },
+        "checkOrderExecutePeriod": {
+          "__name": "BINANCE_JOBS_TRAILING_TRADE_SYSTEM_CHECK_ORDER_EXECUTE_PERIOD",
+          "__description": "Set the seconds for the period of checking the grid trade order executed. Note that reducing the seconds can cause issues with the bot exceeding the API usage.",
+          "__format": "number"
+        }
+      }
+    },
+    "trailingTradeIndicator": {
+      "enabled": {
+        "__name": "BINANCE_JOBS_TRAILING_TRADE_ENABLED",
+        "__format": "boolean"
+      },
+      "cronTime": "BINANCE_JOBS_TRAILING_TRADE_INDICATOR_CRON_TIME"
+    }
+  }
+}
